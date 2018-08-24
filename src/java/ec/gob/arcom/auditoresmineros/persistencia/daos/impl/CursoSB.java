@@ -63,7 +63,8 @@ public class CursoSB implements CursoSBLocal {
     @Override
     public List<Curso> listByEstado() {
         try {
-            Query query= em.createQuery("Select c from Curso c where c.activo= 'true' order by c.id");
+            Query query= em.createQuery("Select c from Curso c where c.activo= :activo order by c.id");
+            query.setParameter("activo", true);
             return query.getResultList();
         } catch(Exception ex) {
             System.out.println(ex.toString());

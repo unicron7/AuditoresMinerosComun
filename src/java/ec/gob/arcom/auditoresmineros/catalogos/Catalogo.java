@@ -31,6 +31,7 @@ public class Catalogo implements Serializable {
     private String nombre;
     private String descripcion;
     private String nemonico;
+    
     @JoinColumn(name = "tipoCatalogo", referencedColumnName = "id")
     @ManyToOne
     private TipoCatalogo tipoCatalogo;

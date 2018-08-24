@@ -39,9 +39,9 @@ public class Auditor implements Serializable {
     private static final long serialVersionUID = 1L;
     
     //Constantes de los nemonicos del estado del auditor
+    public static final String TRAMITE= "ESTTRA";
     public static final String REGISTRADO= "ESTREG";
-    public static final String INSCRITO= "ESTINS";
-    public static final String CALIFICADO= "ESTCAL";
+    public static final String INSCRITO_CALIFICADO= "ESTINSCAL";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,7 +80,7 @@ public class Auditor implements Serializable {
     
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(schema = "audmin")
-    private List<Catalogo> tiposAuditor;
+    private List<TipoAuditor> tiposAuditor;
     
     /*
     * Constructor

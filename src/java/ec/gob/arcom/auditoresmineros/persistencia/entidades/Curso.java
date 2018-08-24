@@ -6,13 +6,15 @@
 package ec.gob.arcom.auditoresmineros.persistencia.entidades;
 
 import ec.gob.arcom.auditoresmineros.catalogos.Catalogo;
+import ec.gob.arcom.auditoresmineros.util.DateUtil;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import lombok.Data;
@@ -33,8 +35,11 @@ public class Curso implements Serializable {
     private String nombre;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDeInicio;
-    @OneToOne
+    
+    @JoinColumn(name = "institucion", referencedColumnName = "id")
+    @ManyToOne
     private Catalogo institucion;
+    
     private String lugar;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDeRegistro;
@@ -50,4 +55,8 @@ public class Curso implements Serializable {
     private String telefonoFijo;
     private String telefonoMovil;
     private String link;
+    
+    public String obtenerFecha() {
+        return DateUtil.obtenerFechaConFormato(fechaDeInicio);
+    }
 }

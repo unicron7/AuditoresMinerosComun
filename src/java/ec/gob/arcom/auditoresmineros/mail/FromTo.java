@@ -28,7 +28,7 @@ public class FromTo {
     public FromTo() {
         Properties propertiesFile= new Properties();
         try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             userName= propertiesFile.getProperty("emusername");
             password= propertiesFile.getProperty("empassword");
             from= propertiesFile.getProperty("emfrom");

@@ -61,6 +61,31 @@ public class MailSender {
         return textHTML;
     }
     
+    public String getInscripcionMsg(String userName) {
+        String textHTML= "<h1 style=\"text-align: center;\">INFORMACI&Oacute;N AUDITORES T&Eacute;CNICOS MINEROS</h1>\n"
+                + "<p style=\"text-align: justify;\">Estimad@ " + userName + ", <strong>ha sido actualizado su estado</strong>, "
+                + "puede consultarlo ingresando a <a href=\"http://www.controlminero.gob.ec:8080/registroaudtecmin\">www.controlminero.gob.ec</a></p>";
+        return textHTML;
+    }
+    
+    public String getCalificacionMsg(String userName) {
+        String textHTML= "<h1 style=\"text-align: center;\">INFORMACI&Oacute;N AUDITORES T&Eacute;CNICOS MINEROS</h1>\n"
+                + "<p style=\"text-align: justify;\">Estimad@ " + userName + ", <strong>ha sido actualizado su estado</strong>, "
+                + "puede consultarlo ingresando a <a href=\"http://www.controlminero.gob.ec:8080/registroaudtecmin\">www.controlminero.gob.ec</a></p>";
+        return textHTML;
+    }
+    
+    public String getResolucionMsg(String userName) {
+        String textHTML= "<h1 style=\"text-align: center;\">INFORMACI&Oacute;N AUDITORES T&Eacute;CNICOS MINEROS</h1>\n" 
+                + "<p style=\"text-align: justify;\">Estimad@ " + userName + ", <strong>ha sido cargada la resoluci&oacute;n de "
+                + "calificaci&oacute;n como Auditor T&eacute;cnico Minero</strong>, puede acercarse a retirar la misma "
+                + "en la Coordinaci&oacute;n Regional de ARCOM mas cercana, con la finalidad de que proceda a la "
+                + "inscripci&oacute;n en el registro minero.</p>";
+        return textHTML;
+    }
+    
+    
+    
     public void sendMailHTML(FromTo datos) {
         try {
             Message message = new MimeMessage(getSession(datos));
@@ -71,6 +96,7 @@ public class MailSender {
             message.setContent(datos.getMsg(), "text/html");
             Transport.send(message);
         } catch (MessagingException e) {
+            System.out.println(e.toString());
             throw new RuntimeException(e);
         }
     }

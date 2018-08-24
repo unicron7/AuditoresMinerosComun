@@ -5,12 +5,15 @@
  */
 package ec.gob.arcom.auditoresmineros.persistencia.entidades;
 
+import ec.gob.arcom.auditoresmineros.catalogos.Catalogo;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import lombok.Data;
@@ -25,11 +28,11 @@ import lombok.Data;
 @Data
 public class Funcionario implements Serializable {
     private static final long serialVersionUID = 1L;
-    public static final long ADMINISTRADOR= 9;
-    public static final long CALIFICADOR= 8;
-    public static final long TALENTO_HUMANO= 7;
-    public static final long JURIDICO= 6;
-    public static final long DIRECTIVO= 18;
+    public static final String ADMINISTRADOR= "FUNADM";
+    public static final String CALIFICADOR= "FUNCAL";
+    public static final String TALENTO_HUMANO= "FUNTAH";
+    public static final String JURIDICO= "FUNJUR";
+    public static final String DIRECTIVO= "FUNDIR";
     
     /*
     * Propiedades
@@ -43,7 +46,10 @@ public class Funcionario implements Serializable {
     private String apellido;
     private String cargo;
     private String email;
-    private Long tipoFuncionario;
+    
+    @JoinColumn(name = "tipoFuncionario", referencedColumnName = "id")
+    @ManyToOne
+    private Catalogo tipoFuncionario;
     private boolean administrador;
     
     @Temporal(javax.persistence.TemporalType.DATE)

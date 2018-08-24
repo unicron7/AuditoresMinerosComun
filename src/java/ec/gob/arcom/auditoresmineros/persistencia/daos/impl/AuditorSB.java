@@ -115,11 +115,11 @@ public class AuditorSB implements AuditorSBLocal {
     }
     
     private List<Auditor> filtrarPorTipo(List<Auditor> auditores, Long tipo) {
-        List<Auditor> filtrados= new ArrayList<Auditor>();
+        List<Auditor> filtrados= new ArrayList<>();
         if(auditores!=null && auditores.size()>0) {
             for (Auditor auditor : auditores) {
-                for (Catalogo cat : auditor.getTiposAuditor()) {
-                    if(cat.getId().compareTo(tipo)==0) {
+                for (TipoAuditor tipoAuditor : auditor.getTiposAuditor()) {
+                    if(tipoAuditor.getCatalogo().getId().compareTo(tipo)==0) {
                         filtrados.add(auditor);
                     }
                 }

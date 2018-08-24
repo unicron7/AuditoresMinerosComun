@@ -63,7 +63,7 @@ public class FileUploadController {
         String adjuntoPath="";
         Properties propertiesFile= new Properties();
         try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             if(System.getProperty("file.separator").equals("/")) {
                 adjuntoPath= propertiesFile.getProperty("adjuntopathunix");
                 new File(adjuntoPath+ruc).mkdir();
@@ -83,7 +83,7 @@ public class FileUploadController {
         String adjuntoPath="";
         Properties propertiesFile= new Properties();
         try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             if(System.getProperty("file.separator").equals("/")) {
                 adjuntoPath= propertiesFile.getProperty("adjuntopathunix");
                 new File(adjuntoPath+ruc+System.getProperty("file.separator")+"certificado").mkdir();
@@ -102,7 +102,7 @@ public class FileUploadController {
         String adjuntoPath="";
         Properties propertiesFile= new Properties();
         try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             if(System.getProperty("file.separator").equals("/")) {
                 adjuntoPath= propertiesFile.getProperty("adjuntopathunix");
                 new File(adjuntoPath+ruc+System.getProperty("file.separator")+"informe").mkdir();
@@ -121,7 +121,7 @@ public class FileUploadController {
         String adjuntoPath="";
         Properties propertiesFile= new Properties();
         try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             if(System.getProperty("file.separator").equals("/")) {
                 adjuntoPath= propertiesFile.getProperty("adjuntopathunix");
                 new File(adjuntoPath+ruc+System.getProperty("file.separator")+"resolucion").mkdir();
@@ -140,7 +140,7 @@ public class FileUploadController {
         String path="";
         Properties propertiesFile= new Properties();
         try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             if(System.getProperty("file.separator").equals("/")) {
                 path= propertiesFile.getProperty("infauditoriapathunix");
                 new File(path+System.getProperty("file.separator")+idAuditoria).mkdir();
@@ -152,6 +152,24 @@ public class FileUploadController {
             Logger.getLogger(FileUploadController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return path+System.getProperty("file.separator")+idAuditoria+System.getProperty("file.separator");
+    }
+    
+    public static String obtenerDestinoFase02(String ruc) {
+        String adjuntoPath="";
+        Properties propertiesFile= new Properties();
+        try {
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
+            if(System.getProperty("file.separator").equals("/")) {
+                adjuntoPath= propertiesFile.getProperty("adjuntopathunix");
+                //new File(adjuntoPath+ruc).mkdir();
+            } else if(System.getProperty("file.separator").equals("\\")) {
+                adjuntoPath= propertiesFile.getProperty("adjuntopathwin");
+                //new File(adjuntoPath+ruc).mkdir();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FileUploadController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return adjuntoPath+ruc+System.getProperty("file.separator");
     }
     
     public static void copyFile(String path, String fileName, InputStream in) {

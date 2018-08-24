@@ -35,6 +35,9 @@ public class CatalogMB implements Serializable {
     private TipoCatalogo tipoCatalogo;
     private Catalogo catalogo;
     private List<Catalogo> tiposAuditor;
+    private List<Catalogo> tiposFuncionario;
+    private List<Catalogo> estadosAuditor;
+    private List<Catalogo> instituciones;
 
 
     /**
@@ -63,14 +66,13 @@ public class CatalogMB implements Serializable {
         this.tiposCatalogo = tiposCatalogo;
     }
     
+    public void newTipoCatalogoAction(){
+        this.tipoCatalogo= new TipoCatalogo();
+    }
     
     public void editCatalogoAction(Integer row) {
         this.tipoCatalogo= this.tiposCatalogo.get(row);
-        //this.catalogos= this.catalogoSB.listByTipo(this.tipoCatalogo.getId());
         this.catalogos= CatalogoController.listarCatalogoPorTipo(catalogoSB, tipoCatalogo);
-        for (Catalogo catalogo1 : catalogos) {
-            System.out.println(catalogo1.getNombre());
-        }
     }
 
     public TipoCatalogo getTipoCatalogo() {
@@ -97,9 +99,40 @@ public class CatalogMB implements Serializable {
     public void setTiposAuditor(List<Catalogo> tiposAuditor) {
         this.tiposAuditor = tiposAuditor;
     }
+
+    public List<Catalogo> getTiposFuncionario() {
+        tiposFuncionario= CatalogoController.getTiposUsuario(tipoCatalogoSB, catalogoSB);
+        return tiposFuncionario;
+    }
+
+    public void setTiposFuncionario(List<Catalogo> tiposFuncionario) {
+        this.tiposFuncionario = tiposFuncionario;
+    }
+
+    public List<Catalogo> getEstadosAuditor() {
+        estadosAuditor= CatalogoController.getEstadosAuditor(tipoCatalogoSB, catalogoSB);
+        return estadosAuditor;
+    }
+
+    public void setEstadosAuditor(List<Catalogo> estadosAuditor) {
+        this.estadosAuditor = estadosAuditor;
+    }
+
+    public List<Catalogo> getInstituciones() {
+        instituciones= CatalogoController.getInstituciones(tipoCatalogoSB, catalogoSB);
+        return instituciones;
+    }
+
+    public void setInstituciones(List<Catalogo> instituciones) {
+        this.instituciones = instituciones;
+    }
+    
+    
     
     public void saveTipoCatalogo() {
-        tipoCatalogo.setDescripcion(tipoCatalogo.getDescripcion().toUpperCase());
+        tipoCatalogo.setActivo(true);
+        tipoCatalogo.setNombre(tipoCatalogo.getNombre().toUpperCase());
+        tipoCatalogo.setNemonico(tipoCatalogo.getNemonico().toUpperCase());
         tipoCatalogoSB.save(tipoCatalogo);
         this.tipoCatalogo= new TipoCatalogo();
         this.tiposCatalogo= tipoCatalogoSB.list();
@@ -109,12 +142,15 @@ public class CatalogMB implements Serializable {
     public void saveCatalogo() {
         catalogo.setActivo(true);
         catalogo.setNombre(catalogo.getNombre().toUpperCase());
-        catalogo.setDescripcion(catalogo.getDescripcion().toUpperCase());
+        catalogo.setNemonico(catalogo.getNemonico().toUpperCase());
         catalogo.setTipoCatalogo(tipoCatalogo);
         catalogoSB.save(catalogo);
         this.catalogo= new Catalogo();
-        //this.catalogos= this.catalogoSB.listByTipo(this.tipoCatalogo.getId());
         this.catalogos= CatalogoController.listarCatalogoPorTipo(catalogoSB, tipoCatalogo);
         FacesUtilComun.showInfoMessage("Aviso", "¡Ha sido creado un nuevo catalogo!");
+    }
+    
+    public void obtenerTiposCatalogo() {
+        this.tiposCatalogo= tipoCatalogoSB.list();
     }
 }

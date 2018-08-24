@@ -20,7 +20,7 @@ public class PropertiesReader {
     public static String leer(String property) {
         Properties propertiesFile= new Properties();
         try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audtecmin/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             return propertiesFile.getProperty(property);
         } catch (IOException ex) {
             System.out.println("No se logró leer el archivo de propiedades, " + property + " : " + ex.toString());
@@ -32,7 +32,7 @@ public class PropertiesReader {
         Properties propertiesFile= new Properties();
         InputStreamReader reader;
         try {
-            reader= new InputStreamReader(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"),
+            reader= new InputStreamReader(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"),
                     StandardCharsets.UTF_8);
             propertiesFile.load(reader);
             return propertiesFile.getProperty(property);

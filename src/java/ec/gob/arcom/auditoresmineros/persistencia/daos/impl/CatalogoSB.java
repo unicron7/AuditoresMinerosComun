@@ -76,7 +76,7 @@ public class CatalogoSB implements CatalogoSBLocal {
     @Override
     public List<Catalogo> listByTipoCatalogo(Long pk) {
         try {
-            Query query= em.createQuery("Select cat from Catalogo cat where cat.activo= :activo and cat.tipoCatalogo.id= :tipoCatalogoId");
+            Query query= em.createQuery("Select cat from Catalogo cat where cat.activo= :activo and cat.tipoCatalogo.id= :tipoCatalogoId order by cat.id");
             query.setParameter("activo", true);
             query.setParameter("tipoCatalogoId", pk);
             return query.getResultList();

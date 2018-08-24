@@ -29,7 +29,7 @@ public class FileDownloadController {
         Properties propertiesFile= new Properties();
         if(rutaAdicional==null) {
             try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             if(System.getProperty("file.separator").equals("/")) {
                 adjuntoPath= propertiesFile.getProperty("adjuntopathunix");
                 return new File(adjuntoPath+ruc).listFiles();
@@ -42,7 +42,7 @@ public class FileDownloadController {
             }
         } else {
             try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             if(System.getProperty("file.separator").equals("/")) {
                 adjuntoPath= propertiesFile.getProperty("adjuntopathunix");
                 return new File(adjuntoPath+ruc+"/"+rutaAdicional).listFiles();
@@ -166,7 +166,7 @@ public class FileDownloadController {
         Properties propertiesFile= new Properties();
         String path= "";
         try {
-            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/sram/config.properties"));
+            propertiesFile.load(new FileInputStream(System.getProperty("jboss.server.config.dir")+"/audmin/config.properties"));
             if(System.getProperty("file.separator").equals("/")) {
                 path= propertiesFile.getProperty("infauditoriapathunix")+idAuditoria;
             } else if(System.getProperty("file.separator").equals("\\")) {
