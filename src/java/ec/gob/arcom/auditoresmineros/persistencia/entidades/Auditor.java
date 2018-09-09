@@ -43,6 +43,11 @@ public class Auditor implements Serializable {
     public static final String REGISTRADO= "ESTREG";
     public static final String INSCRITO_CALIFICADO= "ESTINSCAL";
     
+    //Constantes de los nemonicos de los tipos de auditor
+    public static final String PRODUCCION= "AUDINFPRO";
+    public static final String CATEGORIA_A= "AUDCATA";
+    public static final String CATEGORIA_B= "AUDCATB";
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -58,6 +63,7 @@ public class Auditor implements Serializable {
     private String telefonoFijo;
     private String telefonoMovil;
     private String email;
+    
     @OneToOne(cascade={CascadeType.ALL})
     private Direccion direccion;
     

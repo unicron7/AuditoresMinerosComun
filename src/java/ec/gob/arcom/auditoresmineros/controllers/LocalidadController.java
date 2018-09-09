@@ -17,13 +17,9 @@ public class LocalidadController {
     
     public static List<Localidad> getProvincias(LocalidadSBLocal localidadSB) {
         return localidadSB.listProvincia();
-        
-        /*List tmp= localidadSB.listProvincia();
-        SelectItem[] provincias= new SelectItem[tmp.size()];
-        for (int i=0; i<tmp.size(); i++) {
-            provincias[i]= new SelectItem(((Localidad)tmp.get(i)).getCodigoInec(),((Localidad)tmp.get(i)).getNombre());
-        }
-        return provincias;*/
     }
     
+    public static Localidad getProvinciaByCodigoInec(String codigoInec, LocalidadSBLocal localidadDao) {
+        return localidadDao.findByCodigoInec(codigoInec);
+    }
 }

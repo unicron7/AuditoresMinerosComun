@@ -5,6 +5,7 @@
  */
 package ec.gob.arcom.auditoresmineros.persistencia.daos;
 
+import ec.gob.arcom.auditoresmineros.catalogos.Catalogo;
 import ec.gob.arcom.auditoresmineros.persistencia.entidades.Auditor;
 import java.util.List;
 import javax.ejb.Local;
@@ -20,7 +21,9 @@ public interface AuditorSBLocal {
     List<Auditor> listAuditoresActivos();
     List<Auditor> listAuditoresActivosByEstado(long estado);
     List<Auditor> listAuditores(long estado);
+    List<Auditor> listAuditores(Catalogo estado);
     List<Auditor> listAuditores(long estado, Long tipo);
+    List<Auditor> listAuditores(Catalogo estado, Catalogo tipo);
     Auditor findById(Long id);
 
     void update(Auditor auditor);

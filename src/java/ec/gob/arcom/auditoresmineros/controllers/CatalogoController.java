@@ -17,25 +17,25 @@ import java.util.List;
  */
 public class CatalogoController {
     public static List<Catalogo> getInstituciones(TipoCatalogoSBLocal tipoCatalogoDao, CatalogoSBLocal catalogoDao) {
-        TipoCatalogo tipoCatalogo= obtenerTipoCatalogoPorNemonico(tipoCatalogoDao, "INSEDU");
+        TipoCatalogo tipoCatalogo= getTipoCatalogoByNemonico(tipoCatalogoDao, "INSEDU");
         List<Catalogo> instituciones= listarCatalogoPorTipo(catalogoDao, tipoCatalogo);
         return instituciones;
     }
     
     public static List<Catalogo> getTiposUsuario(TipoCatalogoSBLocal tipoCatalogoDao, CatalogoSBLocal catalogoDao) {
-        TipoCatalogo tipoCatalogo= obtenerTipoCatalogoPorNemonico(tipoCatalogoDao, "TIPFUN");
+        TipoCatalogo tipoCatalogo= getTipoCatalogoByNemonico(tipoCatalogoDao, "TIPFUN");
         List<Catalogo> tiposUsuario= listarCatalogoPorTipo(catalogoDao, tipoCatalogo);
         return tiposUsuario;
     }
     
     public static List<Catalogo> getTiposAuditor(TipoCatalogoSBLocal tipoCatalogoDao, CatalogoSBLocal catalogoDao) {
-        TipoCatalogo tipoCatalogo= obtenerTipoCatalogoPorNemonico(tipoCatalogoDao, "TIPAUD");
+        TipoCatalogo tipoCatalogo= getTipoCatalogoByNemonico(tipoCatalogoDao, "TIPAUD");
         List<Catalogo> tiposAuditor= listarCatalogoPorTipo(catalogoDao, tipoCatalogo);
         return tiposAuditor;
     }
     
     public static List<Catalogo> getEstadosAuditor(TipoCatalogoSBLocal tipoCatalogoDao, CatalogoSBLocal catalogoDao) {
-        TipoCatalogo tipoCatalogo= obtenerTipoCatalogoPorNemonico(tipoCatalogoDao, "ESTAUD");
+        TipoCatalogo tipoCatalogo= getTipoCatalogoByNemonico(tipoCatalogoDao, "ESTAUD");
         List<Catalogo> estadosAuditor= listarCatalogoPorTipo(catalogoDao, tipoCatalogo);
         return estadosAuditor;
     }
@@ -44,7 +44,11 @@ public class CatalogoController {
         return catalogoDao.find(id);
     }
     
-    public static TipoCatalogo obtenerTipoCatalogoPorNemonico(TipoCatalogoSBLocal tipoCatalogoDao, String nemonico) {
+    public static Catalogo getCatalogoByNemonico(String nemonico, CatalogoSBLocal catalogoDao) {
+        return catalogoDao.findByNemonico(nemonico);
+    }
+    
+    public static TipoCatalogo getTipoCatalogoByNemonico(TipoCatalogoSBLocal tipoCatalogoDao, String nemonico) {
         return tipoCatalogoDao.findByNemonico(nemonico);
     }
     

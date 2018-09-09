@@ -6,8 +6,8 @@
 package ec.gob.arcom.auditoresmineros.persistencia.entidades;
 
 import ec.gob.arcom.auditoresmineros.catalogos.Catalogo;
+import ec.gob.arcom.auditoresmineros.util.DateUtil;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,12 +30,16 @@ import lombok.Data;
 public class Auditoria implements Serializable {
     private static final long serialVersionUID = 1L;
     
+    //Constantes de los nemonicos del estado de la auditoria
+    public static final String VIGENTE= "ESTVIG";
+    public static final String FINALIZADO= "ESTFIN";
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne
     @JoinColumn(name = "auditor", referencedColumnName = "id")
+    @ManyToOne
     private Auditor auditor;
     
     @ManyToOne
@@ -49,18 +53,27 @@ public class Auditoria implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIME)
     private Date horaDeAsignacion;
     
-    private Long tipoAuditoria;
+    @JoinColumn(name = "tipoAuditoria", referencedColumnName = "id")
+    @ManyToOne
+    private Catalogo tipoAuditoria;
+    
     private String observacion;
     private boolean activo;
-    @OneToOne
+    
     @JoinColumn(name = "solicitud", referencedColumnName = "id")
+    @OneToOne
     private Solicitud solicitud;
-    @ManyToOne
+    
     @JoinColumn(name = "estadoAuditoria", referencedColumnName = "id")
+    @ManyToOne
     private Catalogo estadoAuditoria;
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDeFinalizacion;
     @Temporal(javax.persistence.TemporalType.TIME)
     private Date horaDeFinalizacion;
     
+    public String obtenerFecha() {
+        return DateUtil.obtenerFechaConFormato(fechaDeAsignacion);
+    }
 }

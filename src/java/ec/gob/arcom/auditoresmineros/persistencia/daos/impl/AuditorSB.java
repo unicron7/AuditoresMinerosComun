@@ -127,4 +127,28 @@ public class AuditorSB implements AuditorSBLocal {
         }
         return filtrados;
     }
+
+    @Override
+    public List<Auditor> listAuditores(Catalogo estado) {
+        try {
+            Query query= em.createQuery("Select a from Auditor a where a.estado= :estado");
+            query.setParameter("estado", estado);
+            return query.getResultList();
+        } catch(Exception ex) {
+            System.out.println(ex.toString());
+        }
+        return null;
+    }
+
+    @Override
+    public List<Auditor> listAuditores(Catalogo estado, Catalogo tipo) {
+        try {
+            Query query= em.createQuery("Select a from Auditor a where a.estado= :estado order by a.razonSocial");
+            query.setParameter("estado", estado);
+            return filtrarPorTipo(query.getResultList(), tipo.getId());
+        } catch(Exception ex) {
+            System.out.println(ex.toString());
+        }
+        return null;
+    }
 }
